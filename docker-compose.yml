@@ -1,0 +1,42 @@
+version: '2'
+
+volumes:
+  nextcloud:
+  db:
+
+services:
+  db:
+    image: mariadb:10.5
+    restart: unless-stopped
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+  
+  redis-nextcloud:
+    image: redis:alpine
+    container_name: redis-nextcloud
+    command: redis-server --requirepass nextcloud
+    restart: unless-stopped      
+  
+  app:
+    image: nextcloud
+    restart: unless-stopped
+    ports:
+      - 8081:80
+    links:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+      - ./nextcloud/config:/var/www/html/config
+      - ./nextcloud/data:/var/www/html/data
+      - ./nextcloud.ini:/usr/local/etc/php/conf.d/nextcloud.ini
+    environment:
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DA
+      - REDIS_HOST=redis-nextcloud
+      - REDIS_HOST_PASSWORD=nextcloud
