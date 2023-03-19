@@ -22,10 +22,11 @@
 Nextcloud оптимизирован для использования только с одним доменом. Таким образом, рекомендуется оставаться только с одним доменом вместо того, чтобы использовать несколько.
 
 Тюнинг:
-Оригинал статьи сбазой данных postgres https://antoshabrain.blogspot.com/2021/12/docker-nextcloud-postgres-redis-amd64.html
+Оригинал статьи сбазой данных postgres (https://antoshabrain.blogspot.com/2021/12/docker-nextcloud-postgres-redis-amd64.html)
 Останавливаем контейнер
 В папке приложени, рядом с docker-compose.yml создадим фаил nextcloud.ini (nano nextcloud.ini)
 Содержание подправьте под ресурсы вашего сервера
+
 ———————————————————————
 
 upload_max_filesize=16G
