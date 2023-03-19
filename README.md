@@ -61,4 +61,5 @@ Nextcloud использует специальный фаил cron.php для �
 
 В самую нижнюю строчку добавляем наше задание
 
-***/5 * * * * sudo /usr/bin/docker exec -u www-data nextcloud php -f /var/www/html/cron.php**
+***/5 * * * * sudo /usr/bin/docker exec -u www-data *nextcloud-app-1* php -f /var/www/html/cron.php** 
+(где ***nextcloud-app-1*** - имя контейнера, поменяйте на свой, если отличается)
